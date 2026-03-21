@@ -15,6 +15,29 @@
         .game-img { width: 150px; height: 150px; background: #444; border-radius: 8px; flex-shrink: 0; object-fit: cover; }
         .btn { display: inline-block; background: #007bff; color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; margin-top: 10px; }
         .btn:hover { background: #0056b3; }
+
+        /* Если экран меньше 600px (типичный телефон) */
+@media (max-width: 600px) {
+    .game-card {
+        flex-direction: column; /* Картинка и текст встанут друг под друга */
+        text-align: center;
+        padding: 15px;
+    }
+
+    .game-img {
+        width: 100%; /* Картинка растянется на всю ширину */
+        max-width: 250px; /* Но не будет слишком огромной */
+        height: auto;
+    }
+
+    header {
+        padding: 30px 10px; /* Уменьшаем отступы в шапке */
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Уменьшаем шрифт заголовка */
+    }
+}
     </style>
 </head>
 <body>
