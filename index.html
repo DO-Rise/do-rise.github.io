@@ -5,39 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D.O.Rise | Game Dev Portfolio</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; margin: 0; background: #1a1a1a; color: #eee; }
+        /* --- БАЗОВЫЕ СТИЛИ (ПК и общие) --- */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; background: #1a1a1a; color: #eee; }
         header { background: #2d2d2d; padding: 50px 20px; text-align: center; border-bottom: 3px solid #007bff; }
         .container { max-width: 900px; margin: auto; padding: 20px; }
-        h1 { margin: 0; color: #fff; }
-        .contact-links a { color: #007bff; margin: 0 10px; text-decoration: none; font-weight: bold; }
-        .game-card { background: #2d2d2d; border-radius: 10px; padding: 20px; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; transition: 0.3s; }
+        h1 { margin: 0; color: #fff; font-size: 2.5rem; }
+        .contact-links { margin-top: 10px; }
+        .contact-links a { color: #007bff; margin: 0 10px; text-decoration: none; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .contact-links a:hover { border-bottom: 1px solid #007bff; }
+        
+        /* КАРТОЧКА ИГРЫ (Основа - ПК) */
+        .game-card { background: #2d2d2d; border-radius: 10px; padding: 25px; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         .game-card:hover { transform: translateY(-5px); background: #363636; }
         .game-img { width: 150px; height: 150px; background: #444; border-radius: 8px; flex-shrink: 0; object-fit: cover; }
-        .btn { display: inline-block; background: #007bff; color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; margin-top: 10px; }
+        
+        /* Блок с текстом на ПК занимает оставшееся место */
+        .game-info { flex: 1; }
+        .game-info h3 { margin-top: 0; color: #fff; font-size: 1.5rem; }
+
+        /* КНОПКА */
+        .btn { display: inline-block; background: #007bff; color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; transition: 0.2s; }
         .btn:hover { background: #0056b3; }
 
-        /* Если экран меньше 600px (типичный телефон) */
-@media (max-width: 600px) {
-    .game-card {
-        flex-direction: column; /* Картинка и текст встанут друг под друга */
-        text-align: center;
-        padding: 15px;
-    }
+        /* --- ИСПРАВЛЕННЫЙ БЛОК АДАПТАЦИИ (Для телефона) --- */
+        @media (max-width: 768px) { /* Чуть увеличил диапазон для надежности */
+            .game-card {
+                flex-direction: column; /* Вертикальная колонка */
+                align-items: center; /* Центрируем всё */
+                text-align: center; /* Центрируем текст */
+                padding: 20px;
+            }
 
-    .game-img {
-        width: 100%; /* Картинка растянется на всю ширину */
-        max-width: 250px; /* Но не будет слишком огромной */
-        height: auto;
-    }
+            .game-img {
+                width: 100%;
+                max-width: 200px; /* Уменьшаем картинку, чтобы не была огромной */
+                height: auto;
+                margin-bottom: 15px; /* Отступ до текста */
+            }
 
-    header {
-        padding: 30px 10px; /* Уменьшаем отступы в шапке */
-    }
+            .game-info h3 { font-size: 1.3rem; }
+            .game-info p { font-size: 0.95rem; margin-bottom: 15px; }
 
-    h1 {
-        font-size: 1.8rem; /* Уменьшаем шрифт заголовка */
-    }
-}
+            .btn {
+                padding: 12px 30px; /* Укрупняем кнопку для нажатия пальцем */
+                display: block; /* Кнопка занимает всю ширину в своем контейнере */
+                width: auto;
+                margin: 0 auto;
+            }
+
+            /* Мелкие правки шапки */
+            header { padding: 30px 10px; }
+            h1 { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -59,7 +78,7 @@
 
     <div class="game-card">
         <img src="Avatars_01.png" alt="Tap Tap Destroy" class="game-img">
-        <div>
+        <div class="game-info">
             <h3>Tap Tap Destroy</h3>
             <p>Динамичный 2D кликер, где ваша задача — максимально быстро разрушать здания и юнитов. Простой, но затягивающий геймплей для мобильных устройств.</p>
             <a href="https://play.google.com/store/apps/details?id=com.dorise.taptapdestroy&pcampaignid=web_share" class="btn">Играть в Google Play</a>
@@ -67,8 +86,8 @@
     </div>
 
     <div class="game-card">
-        <div class="game-img" style="display: flex; align-items: center; justify-content: center; background: #333;">Скоро</div>
-        <div>
+        <div class="game-img" style="display: flex; align-items: center; justify-content: center; background: #333; color: #eee; font-weight: bold; border-radius: 8px;">Скоро</div>
+        <div class="game-info">
             <h3>Новый проект</h3>
             <p>В данный момент я работаю над захватывающим новым проектом. Следите за обновлениями!</p>
         </div>
