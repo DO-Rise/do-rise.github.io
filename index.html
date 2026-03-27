@@ -5,18 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D.O.Rise | Game Dev Portfolio</title>
     <style>
+        /* --- АНИМАЦИЯ ФОНА --- */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         /* --- БАЗОВЫЕ СТИЛИ --- */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; background: #1a1a1a; color: #eee; }
-        header { background: #2d2d2d; padding: 50px 20px; text-align: center; border-bottom: 3px solid #007bff; position: relative; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            margin: 0; 
+            color: #eee;
+            /* Сетка + Анимированный градиент */
+            background: 
+                linear-gradient(rgba(0, 123, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 123, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(-45deg, #1a1a1a, #1a1e2e, #111, #1a1a1a);
+            background-size: 40px 40px, 40px 40px, 400% 400%;
+            background-attachment: fixed;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        header { 
+            background: rgba(45, 45, 45, 0.8); 
+            backdrop-filter: blur(10px);
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 2px solid rgba(0, 123, 255, 0.5); 
+            position: relative; 
+        }
+
         .container { max-width: 900px; margin: auto; padding: 20px; }
-        h1 { margin: 0; color: #fff; font-size: 2.5rem; }
+        h1 { margin: 0; color: #fff; font-size: 2.5rem; text-shadow: 0 0 15px rgba(0, 123, 255, 0.5); }
         
         /* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА */
         .lang-switch {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: #444;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 1px solid #007bff;
             padding: 8px 15px;
@@ -24,31 +53,63 @@
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
+            backdrop-filter: blur(5px);
         }
-        .lang-switch:hover { background: #007bff; }
+        .lang-switch:hover { background: #007bff; box-shadow: 0 0 15px #007bff; }
 
         .contact-links { margin-top: 10px; }
         .contact-links a { color: #007bff; margin: 0 10px; text-decoration: none; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
-        .contact-links a:hover { border-bottom: 1px solid #007bff; }
+        .contact-links a:hover { color: #fff; border-bottom: 1px solid #007bff; }
         
-        /* КАРТОЧКА ИГРЫ */
-        .game-card { background: #2d2d2d; border-radius: 10px; padding: 25px; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .game-card:hover { transform: translateY(-5px); background: #363636; }
-        .game-img { width: 150px; height: 150px; background: #444; border-radius: 8px; flex-shrink: 0; object-fit: cover; }
+        /* КАРТОЧКА ИГРЫ (Эффект стекла) */
+        .game-card { 
+            background: rgba(45, 45, 45, 0.4); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px; 
+            padding: 25px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            gap: 20px; 
+            align-items: center; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); 
+        }
+        .game-card:hover { 
+            transform: translateY(-8px); 
+            background: rgba(54, 54, 54, 0.6); 
+            border-color: rgba(0, 123, 255, 0.8);
+            box-shadow: 0 12px 40px 0 rgba(0, 123, 255, 0.2);
+        }
+
+        .game-img { width: 150px; height: 150px; background: #333; border-radius: 10px; flex-shrink: 0; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
         
         .game-info { flex: 1; }
         .game-info h3 { margin-top: 0; color: #fff; font-size: 1.5rem; }
 
-        .btn { display: inline-block; background: #007bff; color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; transition: 0.2s; }
-        .btn:hover { background: #0056b3; }
+        .btn { 
+            display: inline-block; 
+            background: #007bff; 
+            color: white; 
+            padding: 10px 25px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            margin-top: 15px; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #0056b3; box-shadow: 0 0 20px rgba(0, 123, 255, 0.4); transform: scale(1.05); }
 
         /* СКРЫТИЕ ЯЗЫКОВ */
-        .lang-en { display: none; } /* По умолчанию русский виден, английский скрыт */
+        .lang-en { display: none; }
 
         @media (max-width: 768px) {
             .game-card { flex-direction: column; text-align: center; padding: 20px; }
-            .game-img { width: 100%; max-width: 200px; height: auto; margin-bottom: 15px; }
-            .btn { display: block; width: auto; margin: 0 auto; }
+            .game-img { width: 100%; max-width: 180px; height: auto; }
+            .btn { display: block; width: auto; margin: 10px auto; }
             header { padding: 40px 10px; }
             .lang-switch { top: 10px; right: 10px; font-size: 0.8rem; }
         }
@@ -73,23 +134,13 @@
     
     <div class="lang-ru">
         <p>Я не люблю скучные туториалы и бесконечные диалоги. Мой стиль — это чистый геймплей, драйв и немного хаоса. В моих играх всё просто: зашел, разобрался за секунду и погнал ставить рекорды.</p>
-        <ul>
-            <li><b>Никаких повторов:</b> Процедурная генерация делает каждый забег уникальным.</li>
-            <li><b>Сделано вручную:</b> Код, идеи и капля магии нейросетей.</li>
-            <li><b>Скорость:</b> Легкие игры, которые затягивают надолго.</li>
-        </ul>
     </div>
 
     <div class="lang-en">
         <p>I’m not a fan of boring tutorials or endless dialogue. My style is pure gameplay, high energy, and a bit of chaos. In my games, it’s simple: jump in, figure it out in a second, and start chasing high scores.</p>
-        <ul>
-            <li><b>No repetitions:</b> Procedural generation builds a new world every time.</li>
-            <li><b>Handcrafted:</b> I write the code, create ideas, and spice it up with AI.</li>
-            <li><b>Fast and light:</b> Small games that keep you hooked.</li>
-        </ul>
     </div>
 
-    <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
+    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
 
     <h2 class="lang-ru">Мои игры</h2>
     <h2 class="lang-en">My Games</h2>
@@ -98,25 +149,22 @@
         <img src="Avatars_01.png" alt="Tap Tap Destroy" class="game-img">
         <div class="game-info">
             <h3>Tap Tap Destroy</h3>
-            
             <div class="lang-ru">
-                <p>Динамичный 2D экшен с видом сверху и процедурными островами! Каждый уровень — это новый вызов, новые враги и чистый хаос. Управляй движением пальцем, тапай по врагам и разрушай здания, чтобы выжить.</p>
+                <p>Динамичный 2D экшен с процедурными островами! Уничтожай врагов тапами и разрушай постройки, чтобы выжить в хаосе.</p>
                 <a href="https://play.google.com/store/apps/details?id=com.dorise.taptapdestroy" class="btn">Играть в Google Play</a>
             </div>
-
             <div class="lang-en">
-                <p>A dynamic top-down 2D action experience with procedurally generated islands! Every run is fresh chaos. Move with your finger, tap to destroy enemies, and demolish buildings to survive the mayhem.</p>
+                <p>A dynamic top-down 2D action experience with procedurally generated islands! Tap to destroy enemies and buildings to survive.</p>
                 <a href="https://play.google.com/store/apps/details?id=com.dorise.taptapdestroy" class="btn">Play on Google Play</a>
             </div>
         </div>
     </div>
 
     <div class="game-card">
-        <div class="game-img" style="display: flex; align-items: center; justify-content: center; background: #333; color: #eee; font-weight: bold; border-radius: 8px;">Soon</div>
+        <div class="game-img" style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); color: #888; font-weight: bold;">Soon</div>
         <div class="game-info">
             <h3 class="lang-ru">Новый проект</h3>
             <h3 class="lang-en">New Project</h3>
-            
             <p class="lang-ru">В данный момент я работаю над захватывающим новым проектом. Следите за обновлениями!</p>
             <p class="lang-en">I am currently working on an exciting new project. Stay tuned for updates!</p>
         </div>
@@ -132,13 +180,11 @@
         const btn = document.getElementById('langBtn');
 
         if (currentLang === 'ru') {
-            // Переключаем на английский
             ruEls.forEach(el => el.style.display = 'none');
             enEls.forEach(el => el.style.display = 'block');
             btn.innerText = 'RU';
             currentLang = 'en';
         } else {
-            // Переключаем на русский
             ruEls.forEach(el => el.style.display = 'block');
             enEls.forEach(el => el.style.display = 'none');
             btn.innerText = 'EN';
