@@ -5,126 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D.O.Rise | Game Dev Portfolio</title>
     <style>
-        /* --- БАЗОВЫЕ СТИЛИ (ПК и общие) --- */
+        /* --- БАЗОВЫЕ СТИЛИ --- */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; background: #1a1a1a; color: #eee; }
-        header { background: #2d2d2d; padding: 50px 20px; text-align: center; border-bottom: 3px solid #007bff; }
+        header { background: #2d2d2d; padding: 50px 20px; text-align: center; border-bottom: 3px solid #007bff; position: relative; }
         .container { max-width: 900px; margin: auto; padding: 20px; }
         h1 { margin: 0; color: #fff; font-size: 2.5rem; }
+        
+        /* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #444;
+            color: white;
+            border: 1px solid #007bff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .lang-switch:hover { background: #007bff; }
+
         .contact-links { margin-top: 10px; }
         .contact-links a { color: #007bff; margin: 0 10px; text-decoration: none; font-weight: bold; border-bottom: 1px solid transparent; transition: 0.3s; }
         .contact-links a:hover { border-bottom: 1px solid #007bff; }
         
-        /* КАРТОЧКА ИГРЫ (Основа - ПК) */
+        /* КАРТОЧКА ИГРЫ */
         .game-card { background: #2d2d2d; border-radius: 10px; padding: 25px; margin-bottom: 30px; display: flex; gap: 20px; align-items: center; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         .game-card:hover { transform: translateY(-5px); background: #363636; }
         .game-img { width: 150px; height: 150px; background: #444; border-radius: 8px; flex-shrink: 0; object-fit: cover; }
         
-        /* Блок с текстом на ПК занимает оставшееся место */
         .game-info { flex: 1; }
         .game-info h3 { margin-top: 0; color: #fff; font-size: 1.5rem; }
 
-        /* КНОПКА */
         .btn { display: inline-block; background: #007bff; color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; margin-top: 15px; font-weight: bold; transition: 0.2s; }
         .btn:hover { background: #0056b3; }
 
-        /* --- ИСПРАВЛЕННЫЙ БЛОК АДАПТАЦИИ (Для телефона) --- */
-        @media (max-width: 768px) { /* Чуть увеличил диапазон для надежности */
-            .game-card {
-                flex-direction: column; /* Вертикальная колонка */
-                align-items: center; /* Центрируем всё */
-                text-align: center; /* Центрируем текст */
-                padding: 20px;
-            }
+        /* СКРЫТИЕ ЯЗЫКОВ */
+        .lang-en { display: none; } /* По умолчанию русский виден, английский скрыт */
 
-            .game-img {
-                width: 100%;
-                max-width: 200px; /* Уменьшаем картинку, чтобы не была огромной */
-                height: auto;
-                margin-bottom: 15px; /* Отступ до текста */
-            }
-
-            .game-info h3 { font-size: 1.3rem; }
-            .game-info p { font-size: 0.95rem; margin-bottom: 15px; }
-
-            .btn {
-                padding: 12px 30px; /* Укрупняем кнопку для нажатия пальцем */
-                display: block; /* Кнопка занимает всю ширину в своем контейнере */
-                width: auto;
-                margin: 0 auto;
-            }
-
-            /* Мелкие правки шапки */
-            header { padding: 30px 10px; }
-            h1 { font-size: 1.8rem; }
+        @media (max-width: 768px) {
+            .game-card { flex-direction: column; text-align: center; padding: 20px; }
+            .game-img { width: 100%; max-width: 200px; height: auto; margin-bottom: 15px; }
+            .btn { display: block; width: auto; margin: 0 auto; }
+            header { padding: 40px 10px; }
+            .lang-switch { top: 10px; right: 10px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
+    <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
     <h1>D.O.Rise</h1>
-    <p>Game Developer | Unity & C# enthusiast</p>
+    <p class="lang-ru">Разработчик игр | Энтузиаст Unity & C#</p>
+    <p class="lang-en">Game Developer | Unity & C# enthusiast</p>
     <div class="contact-links">
         <a href="mailto:fanworkrise@gmail.com">Email</a>
-        <a href="https://t.me/твой-логин">Telegram (В будущем)</a>
+        <a href="https://t.me/твой-логин">Telegram</a>
     </div>
 </header>
 
 <div class="container">
-    <h2>About Me</h2>
-    <h2>Русский</h2>
-    <p>Я не люблю скучные туториалы и бесконечные диалоги. Мой стиль — это чистый геймплей, драйв и немного хаоса. 
-В моих играх всё просто: зашел, разобрался за секунду и погнал ставить рекорды.
-Что я вкладываю в свои проекты:
-Никаких повторов: Обожаю процедурную генерацию. Каждый раз, когда вы заходите в игру, мир строится заново.
-Сделано вручную: Я сам пишу код, придумываю идеи и приправляю это нейросетями.
-Скорость и легкость: Делаю игры, которые не весят тонну, но затягивают надолго.
-Я постоянно пробую новые идеи — от безумных кликеров до экшенов с видом сверху. 
-Листайте ниже, выбирайте любую игру и попробуйте выжить в том хаосе, который я для вас приготовил!</p>
+    <h2 class="lang-ru">Обо мне</h2>
+    <h2 class="lang-en">About Me</h2>
+    
+    <div class="lang-ru">
+        <p>Я не люблю скучные туториалы и бесконечные диалоги. Мой стиль — это чистый геймплей, драйв и немного хаоса. В моих играх всё просто: зашел, разобрался за секунду и погнал ставить рекорды.</p>
+        <ul>
+            <li><b>Никаких повторов:</b> Процедурная генерация делает каждый забег уникальным.</li>
+            <li><b>Сделано вручную:</b> Код, идеи и капля магии нейросетей.</li>
+            <li><b>Скорость:</b> Легкие игры, которые затягивают надолго.</li>
+        </ul>
+    </div>
 
-    <h2>English</h2>
-    <p>I’m not a fan of boring tutorials or endless dialogue. My style is pure gameplay, high energy, and a bit of chaos. 
-In my games, it’s simple: jump in, figure it out in a second, and start chasing high scores.
-What I put into my projects:
-No repetitions: I love procedural generation. Every time you start a game, the world is built from scratch.
-Handcrafted: I write the code, come up with the ideas, and spice it all up with AI.
-Fast and light: I make games that don’t weigh a ton but keep you hooked for a long time.
+    <div class="lang-en">
+        <p>I’m not a fan of boring tutorials or endless dialogue. My style is pure gameplay, high energy, and a bit of chaos. In my games, it’s simple: jump in, figure it out in a second, and start chasing high scores.</p>
+        <ul>
+            <li><b>No repetitions:</b> Procedural generation builds a new world every time.</li>
+            <li><b>Handcrafted:</b> I write the code, create ideas, and spice it up with AI.</li>
+            <li><b>Fast and light:</b> Small games that keep you hooked.</li>
+        </ul>
+    </div>
 
-I’m constantly trying out new ideas—from crazy clickers to top-down action. 
-Scroll down, pick any game, and try to survive the chaos I’ve prepared for you!</p>
+    <hr style="border: 0; border-top: 1px solid #444; margin: 40px 0;">
 
-    <h2>My Game</h2>
+    <h2 class="lang-ru">Мои игры</h2>
+    <h2 class="lang-en">My Games</h2>
 
     <div class="game-card">
         <img src="Avatars_01.png" alt="Tap Tap Destroy" class="game-img">
         <div class="game-info">
             <h3>Tap Tap Destroy</h3>
-            <p>A dynamic top-down 2D action experience with procedurally generated islands!
+            
+            <div class="lang-ru">
+                <p>Динамичный 2D экшен с видом сверху и процедурными островами! Каждый уровень — это новый вызов, новые враги и чистый хаос. Управляй движением пальцем, тапай по врагам и разрушай здания, чтобы выжить.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.dorise.taptapdestroy" class="btn">Играть в Google Play</a>
+            </div>
 
-In this game, no two runs are ever the same. Every level offers a fresh challenge:
-New island. New enemies. Pure chaos.
-
-Master the Controls
-Success is just a touch away. The controls are intuitive but the gameplay is intense:
-Move: Drag your finger to navigate the shifting terrain.
-Destroy: Tap enemies to eliminate them instantly.
-Strategize: Demolish buildings to cut off enemy buffs and reinforcements.
-
-Survive the Mayhem
-Choose your targets wisely and keep moving. But stay sharp—in this world, the enemies don't just target a character... they attack your finger!
-</p>
-            <a href="https://play.google.com/store/apps/details?id=com.dorise.taptapdestroy&pcampaignid=web_share" class="btn">Play to Google Play</a>
+            <div class="lang-en">
+                <p>A dynamic top-down 2D action experience with procedurally generated islands! Every run is fresh chaos. Move with your finger, tap to destroy enemies, and demolish buildings to survive the mayhem.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.dorise.taptapdestroy" class="btn">Play on Google Play</a>
+            </div>
         </div>
     </div>
 
     <div class="game-card">
-        <div class="game-img" style="display: flex; align-items: center; justify-content: center; background: #333; color: #eee; font-weight: bold; border-radius: 8px;">Скоро</div>
+        <div class="game-img" style="display: flex; align-items: center; justify-content: center; background: #333; color: #eee; font-weight: bold; border-radius: 8px;">Soon</div>
         <div class="game-info">
-            <h3>New Project</h3>
-            <p>В данный момент я работаю над захватывающим новым проектом. Следите за обновлениями!</p>
+            <h3 class="lang-ru">Новый проект</h3>
+            <h3 class="lang-en">New Project</h3>
+            
+            <p class="lang-ru">В данный момент я работаю над захватывающим новым проектом. Следите за обновлениями!</p>
+            <p class="lang-en">I am currently working on an exciting new project. Stay tuned for updates!</p>
         </div>
     </div>
 </div>
+
+<script>
+    let currentLang = 'ru';
+
+    function toggleLanguage() {
+        const ruEls = document.querySelectorAll('.lang-ru');
+        const enEls = document.querySelectorAll('.lang-en');
+        const btn = document.getElementById('langBtn');
+
+        if (currentLang === 'ru') {
+            // Переключаем на английский
+            ruEls.forEach(el => el.style.display = 'none');
+            enEls.forEach(el => el.style.display = 'block');
+            btn.innerText = 'RU';
+            currentLang = 'en';
+        } else {
+            // Переключаем на русский
+            ruEls.forEach(el => el.style.display = 'block');
+            enEls.forEach(el => el.style.display = 'none');
+            btn.innerText = 'EN';
+            currentLang = 'ru';
+        }
+    }
+</script>
 
 </body>
 </html>
